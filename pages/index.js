@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
 
+  // Simulación de búsqueda
   const handleSearch = () => {
     setResults([
       {
@@ -31,25 +36,24 @@ export default function Home() {
       </header>
 
       <div className="flex gap-2 mb-6">
-        <input
-          className="border px-4 py-2 rounded w-full"
+        <Input
           placeholder="Ej: 2 habitaciones en Palermo..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button onClick={handleSearch} className="bg-blue-600 text-white px-4 py-2 rounded">Buscar</button>
+        <Button onClick={handleSearch}>Buscar</Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {results.map((prop) => (
-          <div key={prop.id} className="border rounded overflow-hidden shadow">
-            <img src={prop.image} alt={prop.title} className="w-full h-48 object-cover" />
-            <div className="p-4">
+          <Card key={prop.id}>
+            <img src={prop.image} alt={prop.title} className="rounded-t-xl w-full h-48 object-cover" />
+            <CardContent>
               <h2 className="font-semibold text-lg mb-1">{prop.title}</h2>
               <p className="text-sm text-gray-700 mb-2">{prop.description}</p>
               <p className="font-bold">{prop.price}</p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
